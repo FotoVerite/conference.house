@@ -1,0 +1,21 @@
+<h1>Listings for <%= @event.name %></h1>
+
+<% for listing in @listings %>
+  <h2><%= listing.name %></h2>
+  <p>type: <%= listing.listing_type %></p>
+  <p>Price: <%= number_to_currency(listing.price) %></p>
+  <p><%= listing.description %></p>
+  <ul>
+    <% for user in listing.users %>
+      <li>
+        <%= user.username %>
+      </li>
+    <% end %>
+  </ul>
+  <% if @current_user %>
+    <%= link_to 'message', new_conversation_path(listing_id: listing.id, user_ids: listing.user_ids) %>
+  <% else %>
+  <p><b>Please <%= link_to 'login', login_path %> or <%= link_to 'create an account', signup_path %> to message about this listing</b></p>
+  <% end %>
+
+<% end %>

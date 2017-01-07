@@ -9,6 +9,36 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <%= link_to BRAND, root_path, class: 'navbar-brand' %>
+        <ul class="nav navbar-nav">
+          <li class="<%= 'active' if current_page?(root_path) %>">
+            <%= link_to 'listings', root_path %>
+          </li>
+        </ul>
+          <% if @current_user %>
+            <div class="collapse navbar-collapse navbar-right" >
+              <a href="<%= conversations_path %>" class="btn btn-default navbar-btn mailbox-button ">
+                <span class="glyphicon glyphicon-envelope"></span>
+                  Inbox
+                  <% if  @current_user.mailbox.inbox(unread: true).count > 0 %>
+                    <span class="badge">
+                      <%= @current_user.mailbox.inbox(unread: true).count %>
+                    </span>
+                  <% end %>
+              </a>
+            </div>
+          <% else %>
+            <ul>
+              <li><%= link_to 'Sign Up', signup_path %></li>
+              <li><%= link_to 'Log In', login_path %></li>
+            </ul>
+          <% end %>
+      </div>
+    </nav>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

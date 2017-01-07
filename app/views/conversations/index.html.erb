@@ -1,0 +1,27 @@
+
+<h1>Mail</h1>
+
+<div id="mailbox" class="container">
+  <ul  class="nav nav-tabs">
+  <li class="active">
+    <a  href="#inbox" data-toggle="tab">Inbox</a>
+  </li>
+  <li><a href="#sentbox" data-toggle="tab">Sent</a>
+  </li>
+  <li><a href="#archive" data-toggle="tab">Archive</a>
+  </li>
+</ul>
+
+  <div class="tab-content clearfix">
+    <div class="tab-pane active" id="inbox">
+      <%= render collection: mailbox.inbox, partial: 'conversation' %>
+    </div>
+    <div class="tab-pane" id="sentbox">
+      <%= render collection: mailbox.sentbox, partial: 'conversation' %>
+    </div>
+    <div class="tab-pane" id="archive">
+      <%= render collection: mailbox.trash, partial: 'conversation' %>
+    </div>
+  </div>
+
+</div>

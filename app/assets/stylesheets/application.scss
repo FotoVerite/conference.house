@@ -1,0 +1,34 @@
+/*"bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"*/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+media {
+  min-width: 1200px;
+  .container {
+      max-width: 970px;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+}
+
+.events-list {
+  li {
+    list-style: none;
+    border-bottom: 1px solid black
+  }
+}
+
+.mailbox-button {
+  position:relative;
+  font-color:black;
+  .badge {
+    display: inline;
+    background-color: red;
+  }
+}
+
+#mailbox .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
+}

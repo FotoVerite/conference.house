@@ -16,7 +16,7 @@
 #
 
 class User < ApplicationRecord
-
+  acts_as_messageable
   include SessionMethodIncludes
 
   has_secure_password
@@ -42,6 +42,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def name
+    full_name
+  end
+
+  def mailboxer_email(object)
+   "#{username}@house.xyz"
+  end
+
   # Keep this method public and as a class method because it is called by
   # methods contained in session_method_includes.rb
   def self.create_token
@@ -49,7 +57,7 @@ class User < ApplicationRecord
   end
 
   def self.authenticate(username, password)
-    user = where(username: username).first
+    user = where(username: username).first || where(email: username).first
     return false if user.nil?
     user.authenticate(password)
   end

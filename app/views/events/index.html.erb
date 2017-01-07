@@ -1,0 +1,28 @@
+  <fieldset>
+    <form>
+
+    </form>
+  </fieldset>
+  <ul class="events-list">
+    <% for event in @events %>
+      <li>
+        <div class="row">
+          <div class="col-sm-4">
+            <%= event.name %>
+            <time datetime=<%= "#{event.start_date}/#{event.end_date}"%>>
+              <%= date_span(event.start_date, event.end_date) %>
+            </time>
+            <br/>
+            <%= link_to event.website %>
+          </div>
+          <div class="col-sm-4">
+            <%= address_string(event) %>
+          </div>
+          <div class="col-sm-4">
+            <%= link_to "Listings", event_listings_path(event) %> <br />
+            lfr: <%= event.looking_for_listings.count  %><br />
+            hr: <%= event.have_listings.count  %>
+          </div>
+      </li>
+    <% end %>
+  </ul>

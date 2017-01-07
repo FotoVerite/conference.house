@@ -1,0 +1,8 @@
+<h1>Signup For <%= BRAND %></h1>
+<%= form_for @user do |f| %>
+  <%= render 'form', f: f %>
+  <div class="form-actions">
+    <%= f.button 'Create Account', class: 'btn btn-primary' %>
+    <%= f.button :Cancel, type: :reset, class: 'btn btn-danger' %>
+  </div>
+<% end %>

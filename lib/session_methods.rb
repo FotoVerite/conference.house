@@ -21,9 +21,6 @@ module SessionMethods
 
     def current_user=(new_user)
       session[:id] = new_user ? new_user.id : nil
-      # :wid is stored just to make DON debugging easier
-      session[:wid] = new_user ? new_user.webuser_id : nil
-      session[:student] = new_user ? new_user.student? : nil
       @current_user = new_user || false
     end
 

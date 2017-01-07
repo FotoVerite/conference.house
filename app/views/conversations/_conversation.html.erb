@@ -1,0 +1,26 @@
+
+<li class="list-group-item">
+  <p>
+  <% link = link_to "#{conversation.subject} | #{conversation.recipients.map(&:username).reject {|c| c == @current_user.username}}" , conversation_path(conversation) %>
+  <% if conversation.is_unread?(@current_user) %>
+    <b><%= link %></b>
+  <% else %>
+    <%= link %>
+  <% end %>
+    <% if  conversation.is_trashed?(@current_user) %>
+      <%= link_to untrash_conversation_path(conversation), class: "btn btn-default", method: :post do %>
+        <span class="glyphicon glyphicon-ok"></span>
+        Move to inbox
+      <% end %>
+        <%= link_to trash_conversation_path(conversation), class: "btn btn-default", method: :post do %>
+          <span class="glyphicon glyphicon-trash"></span>
+          Delete
+        <% end %>
+    <% else %>
+      <%= link_to archive_conversation_path(conversation), class: "btn btn-default", method: :post do %>
+        <span class="glyphicon glyphicon-ok"></span>
+        Archive
+      <% end %>
+    <% end %>
+  </p>
+</li>

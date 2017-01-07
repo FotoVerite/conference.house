@@ -1,0 +1,12 @@
+
+<h1><%= conversation.subject %> <small><%= conversation.recipients.map(&:username) %></small></h1>
+<ul class="list-group">
+  <% for receipt in conversation.receipts_for(@current_user).order(created_at: :desc) do %>
+    <li class="list-group-item">
+      <% message = receipt.message  %>
+      <h3 class="list-group-item-heading"><%= message.subject %> <small><%= message.sender.username %></small></h3>
+      <p class="list-group-item-text"><%= message.body %></p>
+    </li>
+  <% end %>
+</ul>
+<%= render 'form', url: reply_conversation_path(conversation), users: conversation.recipients - [@current_user], subject: "Reply to: #{conversation.subject}" %>
