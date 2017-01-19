@@ -36,6 +36,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'active_model_serializers'
 gem 'kaminari'
 gem 'friendly_id'
+gem 'factory_girl_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
