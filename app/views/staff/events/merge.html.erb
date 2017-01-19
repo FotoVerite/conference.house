@@ -1,0 +1,23 @@
+<% @page_title = "Event To Be Merged: #{@event.name}" %>
+
+
+<div class="event new panel panel-default">
+  <div class='panel-heading'><h1>
+  <%= @page_title %> <%= link_to("&laquo; Back to List".html_safe, staff_events_path, :class => 'back-link pull-right') %>
+</h1></div>
+
+  <div class='panel-body'>
+
+  <%= form_for @event, url: merge_events_staff_event_path do |f| %>
+    <div class="form-group">
+      <%= select :merge_id, "", @events.collect {|e| [e.name, e.id ] }, { include_blank: 'Pick Event to be merged into'}, class: 'form-control' %>
+  <% end %>
+
+   <p><%= @event.name %></p>
+   <p>Created By: <%=link_to  @event.user.username, staff_user_path(@event.user)%></p>
+   <p><%= @event.website %></p>
+   <p><%= address_string(@event) %></p>
+   <p>lfr: <%= @event.lfr_count %></p>
+   <p>hr: <%= @event.hr_count %></p>
+  </div>
+</div>

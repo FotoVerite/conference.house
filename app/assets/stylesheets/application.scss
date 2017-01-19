@@ -1,6 +1,17 @@
 /*"bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"*/
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
+
+body {
+    position:relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+}
 
 media {
   min-width: 1200px;
@@ -31,4 +42,66 @@ media {
 
 #mailbox .nav-pills > li > a {
   border-radius: 4px 4px 0 0 ;
+}
+
+.btn.sharp {
+  border-radius:0;
+}
+
+.menu-panal {
+  #status {
+    height:10px;
+  }
+  li {
+    list-style: none;
+  }
+  .btn {
+    margin-bottom:20px;
+    width:200px;
+    padding:20px;
+  }
+}
+
+.comma-seperated-list {
+  padding:0px;
+  clear:both;
+  display: inline;
+  list-style: none;
+  li {
+    display: inline;
+  }
+  li + li:before {
+    content: ", ";
+  }
+}
+
+.material-text-field {
+  border: 0 black solid;
+  border-bottom: 2px gray solid;
+  padding:5px 0;
+  width:100%;
+  &:focus {
+    outline: none;
+    background-image: none !important;
+    border-bottom: 2px blue solid;
+  }
+}
+
+.callout-dark {
+  background:#E2EEF6;
+  padding:100px 0px;
+  border-radius: 2px;
+  .btn {
+    margin-left: 40px;
+  }
+}
+
+footer {
+  padding-top:25px;
+  margin-top:25px;
+  background:#E2EEF6;
+}
+
+@media(max-width:767px){
+
 }

@@ -1,4 +1,10 @@
-  <fieldset>
+  <% serializedEvents = @events.map {|e| EventSerializer.new(e).serializable_hash } %>
+  <%= react_component('EventsProvider', {
+      events: serializedEvents,
+      filteredEvents: serializedEvents
+    })
+  %>
+<!--   <fieldset>
     <form>
 
     </form>
@@ -26,3 +32,4 @@
       </li>
     <% end %>
   </ul>
+ -->

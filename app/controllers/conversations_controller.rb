@@ -9,10 +9,14 @@ class ConversationsController < ApplicationController
 
   def create
     recipients = User.find(params[:message][:recipients])
-    conversation = current_user.
-      send_message(recipients, params[:message][:body],  params[:message][:subject]).conversation
-
-    redirect_to conversation_path(conversation)
+    if params[:message][:body].present? && params[:message][:subject].present?
+      conversation = current_user.send_message(recipients, params[:message][:body],  params[:message][:subject]).conversation
+      redirect_to conversation_path(conversation)
+    else
+      @listing = Listing.find(params[:listing_id])
+      @users = User.find(params[:message][:recipients])
+      render :new
+    end
   end
 
   def show

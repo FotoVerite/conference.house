@@ -10,17 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103232344) do
+ActiveRecord::Schema.define(version: 20170116210037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.string   "email"
+    t.string   "password_digest",           default: "",   null: false
+    t.boolean  "enabled",                   default: true
+    t.boolean  "validated",                 default: true
+    t.string   "email_validation_token"
+    t.string   "remember_token"
+    t.datetime "remember_token_expires_at"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "events", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.string   "website"
     t.string   "venue_name"
@@ -33,8 +44,38 @@ ActiveRecord::Schema.define(version: 20170103232344) do
     t.date     "end_date"
     t.decimal  "lat",            precision: 10, scale: 6
     t.decimal  "lng",            precision: 10, scale: 6
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "slug"
+    t.integer  "listing_count",                           default: 0
+    t.integer  "lfr_count",                               default: 0
+    t.integer  "hr_count",                                default: 0
+    t.integer  "flag_count",                              default: 0
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+  end
+
+  create_table "flags", force: :cascade do |t|
+    t.string   "type_of_flag"
+    t.string   "status"
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["flaggable_type", "flaggable_id"], name: "index_flags_on_flaggable_type_and_flaggable_id", using: :btree
+    t.index ["user_id"], name: "index_flags_on_user_id", using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "listing_assignments", force: :cascade do |t|
@@ -59,8 +100,12 @@ ActiveRecord::Schema.define(version: 20170103232344) do
     t.string   "street_address"
     t.string   "postal_code"
     t.string   "price"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.decimal  "lat",            precision: 10, scale: 6
+    t.decimal  "lng",            precision: 10, scale: 6
+    t.string   "slug"
+    t.integer  "flag_count"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["event_id"], name: "index_listings_on_event_id", using: :btree
   end
 
@@ -118,16 +163,21 @@ ActiveRecord::Schema.define(version: 20170103232344) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "first_name",                limit: 50
-    t.string   "last_name",                 limit: 50
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "username"
     t.string   "email"
-    t.string   "password_digest",                      default: "",   null: false
-    t.boolean  "enabled",                              default: true
-    t.string   "remember_token",            limit: 40
+    t.string   "password_digest",           default: "",   null: false
+    t.boolean  "enabled",                   default: true
+    t.boolean  "validated",                 default: true
+    t.string   "email_validation_token"
+    t.string   "remember_token"
     t.datetime "remember_token_expires_at"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.json     "traits"
+    t.integer  "flag_count"
+    t.string   "slug"
   end
 
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"

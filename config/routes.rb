@@ -19,7 +19,53 @@ Rails.application.routes.draw do
     end
   end
   resources :events, except: [:delete, :show] do
-    resources :listings
+    resources :listings do
+      patch :flag
+    end
   end
   resources :users, except: [:delete]
+
+  namespace :staff do
+
+
+    root :to => "access#menu"
+
+    resource :access, :controller => "access", :except => [:edit, :update] do
+      member do
+        get :get_password_idea
+        get :menu
+        get :cms_menu
+        get :don_data
+        get :forgot_password
+        patch :send_new_password
+      end
+    end
+
+    resources :admins, :except => :show do
+      member do
+        get :delete
+      end
+    end
+
+    resources :users, :except => :show do
+      member do
+        get :delete
+      end
+    end
+
+    resources :events do
+      member do
+        get :delete
+        get :merge
+        patch :merge_events
+      end
+
+      resources :listings, :except => :show do
+        member do
+          get :delete
+        end
+      end
+    end
+
+  end
 end

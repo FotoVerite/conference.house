@@ -1,0 +1,122 @@
+<div class='panel panel-default'>
+  <div class="panel-heading">
+    <h2>Listing Information</h2>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name,
+          placeholder: 'Put your pithy call to action here', class: 'form-control'%>
+      <%= inline_error_message f.object, :name %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description  %>
+      <%= f.text_area :description,
+          placeholder: 'What Type of Roommate are you looking for', class: 'form-control', rows: 10 %>
+      <%= inline_error_message f.object, :description %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :listing_type  %>
+      <%= f.select :listing_type, options_for_select(Listing::TYPES),  {},  class: 'form-control'%>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :price  %>
+      <%= f.select :price, options_for_select(Listing::PRICE), {},  class: 'form-control'%>
+    </div>
+  </div>
+
+</div>
+
+<div class='panel panel-default'>
+  <div class="panel-heading">
+    <h2>Optional Hotel information</h2>
+  </div>
+  <div class="panel-body">
+    <div id="locationField" class="form-group">
+          <input id="autocomplete" placeholder="Enter Hotels's address" type="text"  class='material-text-field'></input>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :hotel, 'Hotel Name' %>
+        <%= f.text_field :hotel,
+          placeholder: 'Hotel Name', class: 'form-control', 'data-geo':"name"%>
+    </div>
+    <div class="form-group">
+        <%= f.label :country %>
+        <%= f.text_field :country,
+          placeholder: 'country', class: 'form-control', 'data-geo':"country"%>
+        <%= inline_error_message f.object, :country %>
+
+    </div>
+    <div class="form-group">
+      <%= f.label :state, 'providence/state' %>
+      <%= f.text_field :state,
+          placeholder: 'providence/state', class: 'form-control', 'data-geo':"administrative_area_level_1"%>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city, 'City' %>
+      <%= f.text_field :city,
+          placeholder: 'City', class: 'form-control', 'data-geo':"locality"%>
+      <%= inline_error_message f.object, :city %>
+    </div>
+    <div class="form-group">
+      <%= f.label :street_address, 'Street Address' %>
+      <%= f.text_field :street_address,
+          placeholder: 'Street Address', class: 'form-control', 'data-geo':"street_address"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :postal_code, 'Postal Code' %>
+      <%= f.text_field :postal_code,
+          placeholder: 'Postal Code', class: 'form-control', 'data-geo':"postal_code"%>
+    </div>
+
+    <div class="form-group">
+      <%= f.hidden_field :lat,
+          placeholder: 'lat', class: 'form-control', 'data-geo':"lat"%>
+    </div>
+
+    <div class="form-group">
+      <%= f.hidden_field :lng,
+          placeholder: 'lng', class: 'form-control', 'data-geo':"lng"%>
+    </div>
+  </div>
+</div>
+<%= content_for :javascript  do %>
+<script defer async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU-bucOI-MiXkducpRJHfUudzVE8KhI2o
+&libraries=places&callback=initGoogle">
+  </script>
+  <script type="text/javascript">
+    function initGoogle() {
+      $("#autocomplete").geocomplete({
+        details: "form",
+        detailsAttribute: "data-geo",
+        types: ["geocode", "establishment"] }).bind(
+        "geocode:result", function(e, r) {
+          var data = {}
+
+          $.each(r.address_components, function(index, object){
+            var name = object.types[0];
+
+            $.each(object.types, function(index, name){
+              data[name] = object.long_name;
+              data[name + "_short"] = object.short_name;
+            });
+          });
+
+          if(data.locality){
+            $('[data-geo=locality]').val(data.locality);
+          }
+          else {
+            $('[data-geo=locality]').val(data.sublocality);
+          }
+          $('[data-geo=street_address]').val([data.street_number, data.route].join(' ').trim())
+          return false;
+        });
+      }
+  </script>
+<% end %>
+

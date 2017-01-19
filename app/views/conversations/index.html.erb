@@ -14,13 +14,28 @@
 
   <div class="tab-content clearfix">
     <div class="tab-pane active" id="inbox">
-      <%= render collection: mailbox.inbox, partial: 'conversation' %>
+      <%  inbox = mailbox.inbox %>
+      <% if inbox.count > 0 %>
+        <%= render collection: inbox, partial: 'conversation' %>
+      <% else %>
+        <h2>You have no new messages</h2>
+      <% end %>
     </div>
     <div class="tab-pane" id="sentbox">
-      <%= render collection: mailbox.sentbox, partial: 'conversation' %>
+     <%  sentbox = mailbox.sentbox %>
+      <% if sentbox.count > 0 %>
+        <%= render collection: sentbox, partial: 'conversation' %>
+      <% else %>
+        <h2>You have no sent messages</h2>
+      <% end %>
     </div>
     <div class="tab-pane" id="archive">
-      <%= render collection: mailbox.trash, partial: 'conversation' %>
+     <%  trash = mailbox.trash %>
+      <% if trash.count > 0 %>
+        <%= render collection: trash, partial: 'conversation' %>
+      <% else %>
+        <h2>You have no archived messages</h2>
+      <% end %>
     </div>
   </div>
 

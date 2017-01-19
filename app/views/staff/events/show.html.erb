@@ -1,0 +1,45 @@
+<% @page_title = "Event #{@event.name}" %>
+
+
+<div class="event new panel panel-default">
+  <div class='panel-heading'><h1>
+  <%= @page_title %> <%= link_to("&laquo; Back to List".html_safe, staff_events_path, :class => 'btn btn-primary back-link pull-right') %>
+</h1></div>
+
+  <div class='panel-body'>
+   <p><%= @event.name %></p>
+   <p>Created By: <%=link_to  @event.user.username, staff_user_path(@event.user)%></p>
+   <p><%= @event.website %></p>
+   <p><%= address_string(@event) %></p>
+   <p>lfr: <%= @event.lfr_count %></p>
+   <p>hr: <%= @event.hr_count %></p>
+   <h2>Flagged Listing</h2>
+   <ul class='list-group'>
+     <% for listing in @flagged_listings %>
+     <li class="list-group-item">
+     <h2 class='list-group-heading'>
+      <%=link_to listing.name, staff_event_listing_path(listing) %>
+        <small>
+          <%= listing.flag_count %>
+          <span class="glyphicon glyphicon-flag"></span>
+        </small>
+      </h2>
+      <p class="list-group-item-text">
+        <%= listing.description %>
+      </p>
+      <p>
+       <ul>
+          <% listing.flags.group_by(&:type_of_flag).each do |k, v| %>
+            <li><%= k %> <%= v.count %></li>
+          <% end %>
+        </ul>
+      </p>
+      <%= form_tag '' do  %>
+        <%= label_tag :status, 'Status of flag'  %>
+        <%= select_tag :status, options_for_select(Flag::STATUS),  class: 'form-control', include_blank: "Set status of flags" %>
+      <% end %>
+    </li>
+     <% end %>
+   </ul>
+  </div>
+</div>

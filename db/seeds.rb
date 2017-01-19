@@ -11,3 +11,12 @@
     FactoryGirl.create(:listing, event_id: e.id)
   }
 }
+
+200.times {
+  user = User.order("RANDOM()").first
+  rand(1..3).times {
+    ids = user.flag_ids.push(0)
+    listing = Listing.where('listings.id not in(?)', ids).order("RANDOM()").first
+    listing.flags.create(user: user,  type_of_flag: Flag::TYPE[rand(0..3)])
+  }
+}

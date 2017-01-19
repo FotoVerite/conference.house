@@ -1,21 +1,52 @@
-<h1>Listings for <%= @event.name %></h1>
-
+<h1>Listings for <%= @event.name %>
+  <%= link_to "Add Listing", new_event_listing_path(@event), class: 'btn btn-primary pull-right hidden-sm hidden-xs' %>
+</h1>
+<hr />
+  <%= link_to "Add Listing", new_event_listing_path(@event), class: 'btn btn-lg btn-primary hidden-md hidden-lg' %>
+<br />
 <% for listing in @listings %>
-  <h2><%= listing.name %></h2>
-  <p>type: <%= listing.listing_type %></p>
-  <p>Price: <%= number_to_currency(listing.price) %></p>
-  <p><%= listing.description %></p>
-  <ul>
-    <% for user in listing.users %>
-      <li>
-        <%= user.username %>
-      </li>
-    <% end %>
-  </ul>
-  <% if @current_user %>
-    <%= link_to 'message', new_conversation_path(listing_id: listing.id, user_ids: listing.user_ids) %>
-  <% else %>
-  <p><b>Please <%= link_to 'login', login_path %> or <%= link_to 'create an account', signup_path %> to message about this listing</b></p>
-  <% end %>
+  <div id="listing-<%= listing.id %>">
+    <h2><%= listing.name %>
+      <% if @current_user && !@user_listing_ids.include?(listing.id) %>
+         <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-flag"></span>
+  Flag <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <% for flag_type in Flag::TYPE %>
+                <li><%= link_to flag_type, event_listing_flag_path(@event, listing, type: flag_type ), remote: true, method: :patch %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    </h2>
+    <div class='content'>
+      <p>type: <%= listing.listing_type %></p>
+      <p>Price: <%= listing.price %></p>
+      <p><%= listing.description %></p>
+      <ul class='comma-seperated-list'>
+        <% for user in listing.users %>
+          <li>
+            <%= user.username %>
+          </li>
+        <% end %>
+      </ul>
+      <% if @current_user %>
+        <br />
+        <br />
+        <% if @user_listing_ids.include?(listing.id) %>
+            <%= link_to 'Edit Your Listing', edit_event_listing_path(@event, listing), class: 'btn btn-primary btn-sm' %>
+          <% else %>
+
+            <%= link_to 'message', new_conversation_path(listing_id: listing.id, user_ids: listing.user_ids), class: 'btn btn-primary btn-sm' %>
+              <!-- Single button -->
+          <% end %>
+      <% else %>
+      <p><b>Please <%= link_to 'login', login_path %> or <%= link_to 'create an account', signup_path %> to message about this listing</b></p>
+      <% end %>
+      </div>
+    </div>
+  <hr />
 
 <% end %>

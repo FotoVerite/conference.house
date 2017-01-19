@@ -1,0 +1,10 @@
+<h1>Create a listing for <%= @event.name %></h1>
+<fieldset>
+  <%= form_for @event do |f| %>
+    <%= render 'form', f: f %>
+    <div class="form-actions">
+      <%= f.button 'Create Listing', class: 'btn btn-primary' %>
+      <%= f.button :Cancel, type: :reset, class: 'btn btn-danger' %>
+    </div>
+  <% end  %>
+</fieldset>

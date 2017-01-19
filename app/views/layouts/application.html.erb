@@ -5,16 +5,15 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <nav class="navbar navbar-inverse navbar-static-top">
       <div class="container">
-        <%= link_to BRAND, root_path, class: 'navbar-brand' %>
+        <%= link_to BRAND, root_path, class: 'navbar-brand', 'data-no-turbolink':"true" %>
         <ul class="nav navbar-nav">
           <li class="<%= 'active' if current_page?(root_path) %>">
-            <%= link_to 'listings', root_path %>
+            <%= link_to 'listings', root_path, ':data-no-turbolink':"true" %>
           </li>
         </ul>
           <% if @current_user %>
@@ -38,7 +37,23 @@
       </div>
     </nav>
     <div class="container">
+      <%= render(:partial => 'layouts/flash_messages') %>
       <%= yield %>
+        <%= javascript_include_tag 'application', defer: Rails.env.production? %>
+
+      <%= yield :javascript %>
     </div>
+    <footer class="bd-footer text-muted">
+      <div class="container">
+        <ul class="bd-footer-links">
+          <li><a href="https://github.com/twbs/bootstrap">GitHub</a></li>
+          <li><a href="https://twitter.com/getbootstrap">Twitter</a></li>
+          <li><a href="/examples/">Examples</a></li>
+          <li><a href="/about/history/">About</a></li>
+        </ul>
+        <p>Designed and built with all the love in the world by <a href="https://twitter.com/mdo" target="_blank">@mdo</a> and <a href="https://twitter.com/fat" target="_blank">@fat</a>. Maintained by the <a href="https://github.com/orgs/twbs/people">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
+        <p>Currently v4.0.0-alpha.6. Code licensed <a rel="license" href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, docs <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.</p>
+      </div>
+    </footer>
   </body>
 </html>

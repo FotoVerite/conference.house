@@ -1,0 +1,11 @@
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <% unless @hide_navigation %>
+      <%= link_to "#{BRAND} STAFF AREA", staff_root_path, class: 'navbar-brand' %>
+      <ul class="nav navbar-nav">
+        <li class="<%= 'active' if current_page?(staff_root_path) ||  current_page?(menu_staff_access_path)%>"><%= link_to('Menu', menu_staff_access_path) %></li>
+        <li><%= link_to('Logout', staff_access_path, :method => :delete) %></li>
+      </ul>
+      <% end %>
+    </div>
+</nav>

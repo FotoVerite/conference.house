@@ -1,2 +1,4 @@
-<h1>Message about <%= @listing.name %></h1>
-<%= render 'form', url: :conversations, users: @users, subject: @listing.name %>
+<div class='panel panel-default'>
+  <div class='panel-heading'><h1>Message about <%= @listing.name %></h1></div>
+  <div class='panel-body'><%= render 'form', url: :conversations, users: @users, subject: @listing.name %></div>
+</div>

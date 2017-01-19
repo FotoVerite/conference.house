@@ -1,0 +1,17 @@
+<% @page_title = "Edit Admin: #{@admin.full_name}" %>
+
+<div class="admin edit panel panel-default">
+  <div class='panel-heading'><h1>
+  <%= @page_title %> <%= link_to("&laquo; Back to List".html_safe, staff_users_path, :class => 'back-link pull-right') %>
+</h1></div>
+
+  <div class='panel-body'>
+    <%= form_for([:staff, @admin]) do |f| %>
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+        <div class="form-actions">
+          <%= submit_tag("Update Admin", class: 'btn btn-primary') %>
+          <%= cancel_button(staff_users_path, class: 'btn btn-primary') %>
+        </div>
+    <% end %>
+  </div>
+</div>

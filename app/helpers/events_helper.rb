@@ -5,9 +5,12 @@ module EventsHelper
   end
 
   def address_string(event)
-    "#{event.country}<br />
-    #{event.state} #{event.city}<br />
-    #{event.street_address} #{event.postal_code}".html_safe
+    [
+      event.venue_name,
+      event.country,
+      "#{event.state} #{event.city}".chomp,
+      "#{event.street_address} #{event.postal_code}".chomp
+    ].compact.join("<br />\n").html_safe
   end
 
 end

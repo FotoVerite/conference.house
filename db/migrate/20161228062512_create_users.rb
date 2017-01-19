@@ -13,6 +13,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.datetime "remember_token_expires_at"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.json "traits"
+      t.integer :flag_count
+      t.string :slug
       t.timestamps
     end
   end

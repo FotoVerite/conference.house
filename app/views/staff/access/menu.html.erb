@@ -1,0 +1,21 @@
+<% @page_title = "Main Menu" %>
+
+<%= javascript_tag("function writeText(objName, txt) { if (document.getElementById) { x = document.getElementById(objName); x.innerHTML = ''; x.innerHTML = txt; } }") %>
+
+<div class="panel panel-info menu-panal">
+  <div class='panel-heading'><h2 class='text-center'>Main Menu</h2>
+    <div id="status" class='text-center'></div>
+  </div>
+  <div class="panel-body"></div>
+    <ul class="left">
+      <%= menu_link "Admin", staff_admins_path(:page => 1), class: 'btn btn-info sharp' %>
+
+      <%= menu_link "Users", staff_users_path(:page => 1), class: 'btn btn-info sharp' %>
+      <%= menu_link("Events", staff_events_path(), class: 'btn btn-info sharp ') %>
+    </ul>
+
+    <ul class="bottom">
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,1 @@
+export const FILTER_EVENTS = 'FILTER_EVENTS';

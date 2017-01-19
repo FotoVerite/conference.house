@@ -1,0 +1,47 @@
+<%= errors_for(f.object) %>
+
+  <h2>Account Information</h2>
+
+  <dl class='form-group'>
+    <dt><%= f.label 'first_name' %></dt>
+    <dd><%= f.text_field(:first_name, class: 'form-control') %></dd>
+  </dl>
+
+  <dl class='form-group'>
+    <dt><%= f.label 'last_name' %></dt>
+    <dd><%= f.text_field(:last_name, class: 'form-control') %></dd>
+  </dl>
+
+  <dl class='form-group'>
+     <dt><%= f.label 'username' %></dt>
+     <dd><%= f.text_field(:username, class: 'form-control') %></dd>
+   </dl>
+
+  <% if f.object.new_record? %>
+    <dl class='form-group'>
+      <dt><%= f.label 'email' %></dt>
+      <dd><%= f.text_field(:email, class: 'form-control') %></dd>
+    </dl>
+  <% else %>
+
+    <dl class='form-group'>
+      <dt><%= f.label 'email' %></dt>
+      <dd><%= f.text_field(:email, class: 'form-control') %></dd>
+    </dl>
+
+    <dl class='form-group'>
+      <dt><%= f.label 'email_confirmation' %></dt>
+      <dd><%= f.text_field(:email_confirmation, class: 'form-control') %></dd>
+    </dl>
+
+    <% end %>
+
+      <dl class='form-group'>
+        <dt><%= f.label 'password' %></dt>
+        <dd><%= f.password_field(:password, class: 'form-control') %></dd>
+      </dl>
+
+    	<dl class='form-group'>
+        <dt><%= f.label 'password_confirmation', 'Password Confirmation' %></dt>
+        <dd><%= f.password_field(:password_confirmation, class: 'form-control') %></dd>
+      </dl>

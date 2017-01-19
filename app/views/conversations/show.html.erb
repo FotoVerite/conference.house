@@ -9,4 +9,7 @@
     </li>
   <% end %>
 </ul>
-<%= render 'form', url: reply_conversation_path(conversation), users: conversation.recipients - [@current_user], subject: "Reply to: #{conversation.subject}" %>
+<div class='panel panel-default'>
+  <div class="panel-heading">Reply to Thread</div>
+  <div class='panel-body'><%= render 'form', url: reply_conversation_path(conversation), users: conversation.recipients - [@current_user], subject: "Reply to: #{conversation.subject}" %></div>
+</div>

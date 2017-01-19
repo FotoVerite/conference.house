@@ -14,6 +14,10 @@
 #  street_address :string
 #  postal_code    :string
 #  price          :string
+#  lat            :decimal(10, 6)
+#  lng            :decimal(10, 6)
+#  slug           :string
+#  flag_count     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
@@ -30,8 +34,8 @@ FactoryGirl.define do
     city {FFaker::AddressUS.city}
     street_address {FFaker::AddressUS.street_address}
     postal_code {FFaker::AddressUS.zip_code}
-    price 150
-    listing_type { Listing::TYPES[rand(0..Listing::TYPES.length)]}
+    price {Listing::PRICE[rand(0..4)]}
+    listing_type { Listing::TYPES[rand(0...Listing::TYPES.length)]}
     transient do
         users {rand(1..3)}
     end

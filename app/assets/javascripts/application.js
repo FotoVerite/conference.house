@@ -14,4 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+//= require moment
+//= require bootstrap-datetimepicker
+//= require_tree ./vendor
+// Browserify'd app components can't use import
+require('./app');

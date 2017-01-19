@@ -2,9 +2,19 @@
 #
 # Table name: admins
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                        :integer          not null, primary key
+#  first_name                :string
+#  last_name                 :string
+#  username                  :string
+#  email                     :string
+#  password_digest           :string           default(""), not null
+#  enabled                   :boolean          default(TRUE)
+#  validated                 :boolean          default(TRUE)
+#  email_validation_token    :string
+#  remember_token            :string
+#  remember_token_expires_at :datetime
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #
 
 FactoryGirl.define do

@@ -14,6 +14,10 @@
 #  street_address :string
 #  postal_code    :string
 #  price          :string
+#  lat            :decimal(10, 6)
+#  lng            :decimal(10, 6)
+#  slug           :string
+#  flag_count     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

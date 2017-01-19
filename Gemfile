@@ -33,6 +33,11 @@ gem 'geokit-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'annotate'
 gem 'mailboxer'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'active_model_serializers'
+gem 'kaminari'
+gem 'friendly_id'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

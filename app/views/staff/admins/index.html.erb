@@ -1,0 +1,49 @@
+<% @page_title = "Administrators" %>
+
+<div class="panel panel-default admin listing">
+  <div class='panel-heading'>
+  	<h1>
+  		<%= @page_title %>
+  		<%= link_to("Create New Admin", new_staff_admin_path, :class => 'btn btn-primary pull-right hidden-sm hidden-xs') %>
+		</h1>
+		<%= link_to("Create New Admin", new_staff_admin_path, :class => 'btn btn-primary hidden-md hidden-lg') %>
+  </div>
+
+  <div class="panel-body"?>
+	  <div class="pagination">
+		  <%= paginate(@admins) %>
+		</div>
+
+		<table class="table table-striped table-inverse">
+			<thead>
+			  <tr>
+			    <th class='hidden-xs'>First Name</th>
+			    <th class='hidden-xs'>Last Name</th>
+			    <th class='hidden-xs'>Email</th>
+			    <th>Username</th>
+			    <th>Enabled</th>
+			    <th>&nbsp;</th>
+			    <th>&nbsp;</th>
+			  </tr>
+			</thead>
+			<tbody>
+		  <% @admins.each do |admin| %>
+			  <tr scope='row'>
+			    <td class='hidden-xs'><%= admin.first_name %></td>
+			    <td class='hidden-xs'><%= admin.last_name %></td>
+			    <td class='hidden-xs'><%= admin.email %></td>
+			    <td><%= admin.username %></td>
+			    <td><%= status_tag(admin.enabled) %></td>
+			    <td><%= link_to('Edit', edit_staff_admin_path(admin), :class => 'btn btn-primary') %></td>
+			    <td><%= link_to('Delete', delete_staff_admin_path(admin),:class => 'btn btn-primary') %></td>
+			  </tr>
+		  <% end %>
+		  </tbody>
+		</table>
+
+		<div class="pagination">
+		  <%= paginate(@admins) %>
+		</div>
+	</div>
+
+</div>

@@ -1,6 +1,9 @@
 require 'ffaker'
 
 FactoryGirl.define do
+  factory :flag do
+
+  end
   sequence :email do |n|
     "basic_email#{n}@gmail.com"
   end
@@ -10,6 +13,6 @@ FactoryGirl.define do
   end
 
   sequence :username do |n|
-    "username#{n}"
+    "#{ FFaker::Company.bs}-username#{n}"
   end
 end
