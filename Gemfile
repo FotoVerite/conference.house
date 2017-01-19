@@ -36,6 +36,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'active_model_serializers'
 gem 'kaminari'
 gem 'friendly_id'
+  gem 'ffaker'
 gem 'factory_girl_rails'
 
 group :development, :test do
