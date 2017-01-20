@@ -9,7 +9,8 @@ const Events = React.createClass({
   propTypes: {
     events: PropTypes.array.isRequired,
     filterEvents: PropTypes.func.isRequired,
-    filteredEvents: PropTypes.array.isRequired
+    filteredEvents: PropTypes.array.isRequired,
+    currentUser: PropTypes.object
   },
 
   filterEvents(event) {
@@ -39,7 +40,11 @@ const Events = React.createClass({
     return (
       <div className="callout-dark text-center fade-in-b">
         <h2>Can't find { this.refs.typeahead.state.entryValue }
-          <a href={`/events/new?event[name]=${this.refs.typeahead.state.entryValue}`} className="btn btn-lg btn-info">Create this event!</a>
+          <br />
+          <br />
+          { this.props.currentUser ?
+           (<a href={`/events/new?event[name]=${this.refs.typeahead.state.entryValue}`} className="btn btn-lg btn-info">Create this event!</a>) : (<p><a href="/login" className="btn btn-lg btn-info">Login</a> to create this event </p>)
+         }
         </h2>
       </div>
       );
@@ -68,7 +73,8 @@ const Events = React.createClass({
 
 const stateToProps = function(state) {
   return { events: state.events,
-          filteredEvents: state.filteredEvents
+          filteredEvents: state.filteredEvents,
+          currentUser: state.currentUser
         };
 };
 

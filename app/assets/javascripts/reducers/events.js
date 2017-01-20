@@ -6,6 +6,9 @@ import * as fuzzy from 'fuzzy';
 export var events = (state = {}, action) => {
   return state;
 };
+export var currentUser = (state = {}, action) => {
+  return state;
+};
 
 export var filteredEvents = (state = {}, action) => {
   if(action.type == types.FILTER_EVENTS) {
@@ -22,5 +25,6 @@ export var filteredEvents = (state = {}, action) => {
 
 export default combineReducers({
   events,
-  filteredEvents
+  filteredEvents,
+  currentUser
 });

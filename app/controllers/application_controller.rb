@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   before_action :logged_in?
 
   def confirm_staff_login
-    unless logged_in?
+    unless admin_logged_in?
       session[:desired_url] = url_for(santize_parameters)
       flash[:notice] = 'Please log in.'
-      redirect_to(new_access_path)
+      redirect_to(new_staff_access_path)
     end
     true
   end
@@ -45,6 +45,18 @@ class ApplicationController < ActionController::Base
     def render_500
       render(file: 'application/error_page_500', status: 500)
       true  # so we can do "render_500 and return"
+    end
+
+    def santize_parameters
+      params.permit(
+        [
+          :event_id,
+          :listing_id,
+          :current_page,
+          :page,
+          :id
+        ]
+      )
     end
 
 end

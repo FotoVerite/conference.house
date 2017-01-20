@@ -1,27 +1,26 @@
-<% @page_title = "Staff Login" %>
+<% @page_title = "Staff Log in for #{BRAND}" %>
 
-<div class="access login">
-  <%= form_tag(staff_access_path) do %>
-    <dl>
-      <dt><%= label_tag('username', 'Username:') %></dt>
-      <dd><%= text_field_tag(:username, params[:username], :size => 30) %></dd>
-    </dl>
-    <dl>
-      <dt><%= label_tag('password', 'Password:') %></dt>
-      <dd><%= password_field_tag(:password, nil, :size => 30) %></dd>
-    </dl>
-    <div class="actions">
-      <%= submit_tag("Log in") %>
-      <%= link_to('Forgot Password', forgot_password_staff_access_path, :id => 'forgot-password') %>
-    </div>
-  <% end %>
-</div>
+<section class="panel panel-default">
 
-<% content_for :head do %>
-  <%= javascript_include_tag('jquery.showpassword') %>
-  <script>
-    $(document).ready(function() {
-      $('input[type="password"]').showPasswordCheckbox();
-    });
-  </script>  
-<%  end %>
+  <div class="panel-heading">
+    <h1 class="page-title"><%= @page_title %></h1>
+  </div>
+
+  <div class="panel-body">
+    <%= form_tag(staff_access_path, :class => 'take-focus') do %>
+     <div class="form-group">
+        <%= label_tag :auth_param, 'Email/Username', nil %>
+        <%= text_field_tag :auth_param, nil, placeholder: 'Email/Username', class: 'form-control'
+        %>
+      </div>
+      <div class="form-group">
+        <%= label_tag :password, nil %>
+        <%= password_field_tag :password, nil, class: 'form-control', placeholder: 'Password'
+        %>
+      </div>
+      <div class="form-actions">
+        <%= submit_tag("Log In", :class => 'btn btn-primary') %>
+      </div>
+    <% end %>
+  </div>
+</section>

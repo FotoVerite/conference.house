@@ -7,7 +7,8 @@ import createStore from '../stores/events-provider';
 const EventsProvider = React.createClass({
   propTypes: {
     events: PropTypes.array.isRequired,
-    filteredEvents: PropTypes.array.isRequired
+    filteredEvents: PropTypes.array.isRequired,
+    currentUser: PropTypes.object
   },
 
   componentWillMount() {
