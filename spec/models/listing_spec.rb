@@ -17,7 +17,7 @@
 #  lat            :decimal(10, 6)
 #  lng            :decimal(10, 6)
 #  slug           :string
-#  flag_count     :integer
+#  flag_count     :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

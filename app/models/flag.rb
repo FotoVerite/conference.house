@@ -16,11 +16,11 @@ class Flag < ApplicationRecord
 
   belongs_to :flaggable, polymorphic: true
   belongs_to :user
+  belongs_to :admin
 
   STATUS = [
     'violation',
-    'not-violation',
-    'unsure'
+    'not-violation'
   ]
 
   TYPE = [
@@ -38,9 +38,6 @@ class Flag < ApplicationRecord
 
   def increment_counter_cache
     self.flaggable.increment!(:flag_count)
-  end
-
-  def update_event_counter_cache
   end
 
   def decrement_counter_cache

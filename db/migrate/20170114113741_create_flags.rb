@@ -3,7 +3,7 @@ class CreateFlags < ActiveRecord::Migration[5.0]
     create_table :flags do |t|
       t.string :type_of_flag, :status
       t.references :flaggable, polymorphic: true, index: true
-      t.references :user, index: true
+      t.references :user, :admin, index: true
       t.timestamps
     end
   end

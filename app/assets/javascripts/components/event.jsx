@@ -10,15 +10,15 @@ export default function Event({event}) {
   return (
     <div className="row list-group-item">
       <div className="col-sm-4">
-        { event.name }
+        { event.name } &nbsp;
         <time dateTime={"${event.start_date}/${event.end_date}"}>
           {event.date_span_attribute}
         </time>
         <br/>
-        <a href={`/${event.website}`}>{ event.website }</a>
+        <p><a href={`http://${event.website}`}>{ event.website }</a></p>
       </div>
-      <div className="col-sm-4"dangerouslySetInnerHTML={{__html: event.address}}>
-      </div>
+      <address className="col-sm-4"dangerouslySetInnerHTML={{__html: event.address}}>
+      </address>
       <div className="col-sm-4">
         <p dangerouslySetInnerHTML={{__html: event.listing_url}}></p>
         <p>lfr: { event.lfr_count }</p>

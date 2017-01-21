@@ -23,6 +23,8 @@ class Admin < ApplicationRecord
 
   has_secure_password
 
+  has_many :flags
+
   validates :username, :email, :first_name, :last_name, presence: true
   validates_length_of :password, minimum: 8, confirmation: true, on: :create
   validates_length_of :password, minimum: 8, confirmation: true, on: :update, unless: 'password.nil?'

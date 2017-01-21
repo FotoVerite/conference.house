@@ -60,8 +60,10 @@ ActiveRecord::Schema.define(version: 20170116210037) do
     t.string   "flaggable_type"
     t.integer  "flaggable_id"
     t.integer  "user_id"
+    t.integer  "admin_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["admin_id"], name: "index_flags_on_admin_id", using: :btree
     t.index ["flaggable_type", "flaggable_id"], name: "index_flags_on_flaggable_type_and_flaggable_id", using: :btree
     t.index ["user_id"], name: "index_flags_on_user_id", using: :btree
   end
@@ -100,13 +102,16 @@ ActiveRecord::Schema.define(version: 20170116210037) do
     t.string   "street_address"
     t.string   "postal_code"
     t.string   "price"
-    t.decimal  "lat",            precision: 10, scale: 6
-    t.decimal  "lng",            precision: 10, scale: 6
+    t.decimal  "lat",                precision: 10, scale: 6
+    t.decimal  "lng",                precision: 10, scale: 6
     t.string   "slug"
-    t.integer  "flag_count"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.integer  "flag_count",                                  default: 0
+    t.boolean  "flags_confirmed",                             default: false
+    t.datetime "flags_confirmed_at"
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.index ["event_id"], name: "index_listings_on_event_id", using: :btree
+    t.index ["flags_confirmed"], name: "index_listings_on_flags_confirmed", using: :btree
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|

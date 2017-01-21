@@ -20,3 +20,5 @@
     listing.flags.create(user: user,  type_of_flag: Flag::TYPE[rand(0..3)])
   }
 }
+
+FactoryGirl.create(:admin, username: 'fotoverite', password: 'password', first_name: 'matthew', last_name: 'bergman')

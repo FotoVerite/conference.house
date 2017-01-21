@@ -60,9 +60,10 @@ Rails.application.routes.draw do
         patch :merge_events
       end
 
-      resources :listings, :except => :show do
+      resources :listings, shallow: true, :except => :show do
         member do
           get :delete
+          patch :confirm_flags
         end
       end
     end

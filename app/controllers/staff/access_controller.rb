@@ -31,7 +31,7 @@ class Staff::AccessController < StaffController
 
   def create
     logout_admin_keeping_session!
-    admin = Admin.authenticate(params['username'], params['password'])
+    admin = Admin.authenticate(params['auth_param'], params['password'])
     if admin && admin.enabled?
       self.current_admin = admin
       handle_remember_cookie!(admin, params[:remember_me] == "1")
@@ -74,8 +74,19 @@ class Staff::AccessController < StaffController
     end
   end
 
-  def get_password_idea
-    render(:plain => get_nice_password)
-  end
+   def desired_url(fallback_url=nil, options={})
+      fallback_url ||= { action: 'index' }
+      key = options[:key] || :desired_url
+      if session[key]
+        url = session[key]
+        session[key] = nil
+      elsif session[:referrer_url]
+        url = session[:referrer_url]
+        session[:referrer_url] = nil
+      else
+        url = fallback_url
+      end
+      url
+    end
 
 end
