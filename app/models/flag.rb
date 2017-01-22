@@ -18,6 +18,8 @@ class Flag < ApplicationRecord
   belongs_to :user
   belongs_to :admin
 
+  scope :unchecked, -> {where('flags.status is NULL')}
+
   STATUS = [
     'violation',
     'not-violation'

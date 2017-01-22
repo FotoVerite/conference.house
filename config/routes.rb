@@ -53,6 +53,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :flags, :only => [:index, :update]
+
     resources :events do
       member do
         get :delete

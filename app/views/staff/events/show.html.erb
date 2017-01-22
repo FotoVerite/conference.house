@@ -3,8 +3,11 @@
 
 <div class="event new panel panel-default">
   <div class='panel-heading'><h1>
-  <%= @page_title %> <%= link_to("&laquo; Back to List".html_safe, staff_events_path, :class => 'btn btn-primary back-link pull-right') %>
-</h1></div>
+  <%= @page_title %> <%= link_to("&laquo; Back to List".html_safe, staff_events_path, :class => 'btn btn-primary btn-lg back-link pull-right hidden-sm hidden-xs') %>
+  </h1>
+  <%= link_to("&laquo; Back to List".html_safe, staff_events_path, :class => 'btn btn-primary btn-lg back-link hidden-md hidden-lg') %>
+
+</div>
 
   <div class='panel-body'>
    <p><%= @event.name %></p>
@@ -42,6 +45,9 @@
     </li>
      <% end %>
    </ul>
+    <% if @flagged_listings.empty? %>
+      <h3>There are no unchecked flagged listings. YAY!</h3>
+    <% end %>
   </div>
 </div>
 

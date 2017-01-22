@@ -1,0 +1,47 @@
+<h2>Flagged Listing <small class='total-unchecked'> <%= @count %></small></h2>
+<div>
+ <ul class='list-group'>
+   <% for listing in @unchecked_listings %>
+   <li id="<%= listing.id %>-listing" class="list-group-item">
+   <h2 class='list-group-heading'>
+    <%= listing.name %>
+      <small class='flag-count'>
+        <%= listing.flag_count %>
+        <span class="glyphicon glyphicon-flag"></span>
+      </small>
+    </h2>
+    <p>Created By: <%=link_to listing.users.first.username, staff_user_path(listing.users.first) %></p>
+    <p class="list-group-item-text">
+      <%= listing.description %>
+    </p>
+    <p>
+     <ul>
+        <% listing.flags.group_by(&:type_of_flag).each do |k, v| %>
+          <li><%= k %> <%= v.count %></li>
+        <% end %>
+      </ul>
+    </p>
+    <%= form_tag confirm_flags_staff_listing_path(listing), method: :patch, remote: true do  %>
+      <%= label_tag :status, 'Status of flag'  %>
+      <%= select_tag :status, options_for_select(Flag::STATUS),  class: 'form-control update-flag-status', include_blank: "Set status of flags" %>
+    <% end %>
+  </li>
+   <% end %>
+ </ul>
+  <% if @unchecked_listings.empty? %>
+    <h3>There are no unchecked flagged listings. YAY!</h3>
+  <% end %>
+</div>
+<%= content_for :javascript  do %>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+      $('.update-flag-status').change(function() {
+        console.log($(this))
+        if($(this).val()) {
+          $(this).parent().submit();
+        }
+      })
+    });
+  </script>
+<% end %>

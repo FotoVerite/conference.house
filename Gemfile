@@ -38,6 +38,7 @@ gem 'kaminari'
 gem 'friendly_id'
   gem 'ffaker'
 gem 'factory_girl_rails'
+gem  'lanyrd'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

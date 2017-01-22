@@ -29,6 +29,7 @@ class Listing < ApplicationRecord
   has_many :listing_assignments, dependent: :destroy
   has_many :users, through: :listing_assignments
   has_many :flags, as: :flaggable
+  has_many :unchecked_flags,  -> { where('flags.status IS NULL') }, as: :flaggable, class_name: 'Flag'
 
   validates :name, :description, presence: true
 
