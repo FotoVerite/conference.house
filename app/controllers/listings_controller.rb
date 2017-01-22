@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
 
   def index
     @event = Event.find(params[:event_id])
-    @listings = @event.listings.where('listings.id not in(?)', current_user.try(:flagged_listing_ids).try(:push, 0) || [0])
+    @listings = @event.listings.where(flags_confirmed: false).where('listings.id not in(?)', current_user.try(:flagged_listing_ids).try(:push, 0) || [0])
     @user_listing_ids = @current_user.try(:listing_ids) || [0]
   end
 
