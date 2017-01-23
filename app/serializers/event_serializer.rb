@@ -33,7 +33,7 @@ class EventSerializer < ActiveModel::Serializer
   attributes :address, :date_span_attribute, :end_date, :name, :start_date, :website, :listing_url, :hr_count, :lfr_count
 
   def listing_url
-    link_to "Listings", event_listings_path(object)
+    link_to "Rooms", event_listings_path(object)
   end
 
   def date_span_attribute

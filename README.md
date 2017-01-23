@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+have postgres installed
 
-Things you may want to cover:
+install ruby 2.3 or above
 
-* Ruby version
+run in this order
 
-* System dependencies
+Bundle install
 
-* Configuration
+rails db:create
+rails db:migrate
+rails db:seed
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If there are no errors everything worked!!!

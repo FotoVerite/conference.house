@@ -52,6 +52,7 @@ const Events = React.createClass({
 
   render() {
     return (<section>
+      <label className="sr-only">I want a room for:</label>
       <Typeahead
         options={_.map(this.props.events, 'name')}
         maxVisible={5}
@@ -59,7 +60,7 @@ const Events = React.createClass({
         className= "form-group"
         onKeyUp= {this.filterEvents}
         onOptionSelected={this.onSelect}
-        placeholder= "Search For an Event"
+        placeholder= "I am looking for a room at?"
         customClasses={{
           input: 'form-control',
           results: 'list-group',

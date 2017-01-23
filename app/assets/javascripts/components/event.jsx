@@ -10,7 +10,7 @@ export default function Event({event}) {
   return (
     <div className="row list-group-item">
       <div className="col-sm-4">
-        { event.name } &nbsp;
+        <b>{ event.name }</b> &nbsp;
         <time dateTime={"${event.start_date}/${event.end_date}"}>
           {event.date_span_attribute}
         </time>
@@ -21,8 +21,8 @@ export default function Event({event}) {
       </address>
       <div className="col-sm-4">
         <p dangerouslySetInnerHTML={{__html: event.listing_url}}></p>
-        <p>lfr: { event.lfr_count }</p>
-        <p> hr: { event.hr_count }</p>
+        <p>looking for a room: { event.lfr_count }</p>
+        <p>I have a  room: { event.hr_count }</p>
       </div>
       <br />
     </div>
